@@ -1,18 +1,7 @@
-# with_controller
+import 'package:mobx/mobx.dart';
+import 'package:flutter/material.dart';
+import 'package:with_controller/with_controller.dart';
 
-A `WithController` widget is a convenience widget for reducing [MobX](https://mobx.pub/) boilerplate burden when you need to initialize a store (and dispose it) and create reactions (and dispose them).
-
-## Getting Started
-
-### Instalation
-
-1. Add `with_controller` to your `pubspec.yaml`
-2. Run `flutter pub get` in your terminal
-3. That's it!
-
-### Example
-
-```dart
 class MyCounterStore {
   @observable
   int counter = 0;
@@ -45,4 +34,3 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-```

@@ -1,6 +1,6 @@
 name: with_controller
-description: A new Flutter package project.
-version: 1.0.0
+description: A package provinding the WithController widget. It is a convenience widget for reducing MobX boilerplate burden when you need to initialize a store, create reactions and dispose.
+version: 1.0.1+1
 
 homepage: https://github.com/savioserra/with_controller
 

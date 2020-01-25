@@ -68,7 +68,8 @@ class WithControllerState<C> extends State<WithController<C>> {
     }
 
     if (reactionDisposers == null) {
-      reactionDisposers = widget.reactions.map((creator) => creator(controller)).toList();
+      reactionDisposers =
+          widget.reactions.map((creator) => creator(controller)).toList();
     }
 
     super.didChangeDependencies();
