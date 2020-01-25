@@ -1,0 +1,19 @@
+name: with_controller
+description: A new Flutter package project.
+version: 1.0.0
+
+homepage: https://github.com/savioserra/with_controller
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  mobx: ^0.4.0+4
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
