@@ -6,7 +6,7 @@ import 'package:with_controller/with_controller.dart';
 
 class CounterStore {
   late MobX.Observable<int> counter;
-  MobX.Action? increment;
+  late MobX.Action increment;
 
   CounterStore() {
     counter = MobX.Observable(0);
@@ -64,8 +64,8 @@ void main() {
                   (r) => ctrl.counter.value, (dynamic v) => holder = v)
             ],
             controller: (ctx) => CounterStore(),
-            builder: (ctx, ctrl) => RaisedButton(
-              onPressed: () => ctrl.increment!.call(),
+            builder: (ctx, ctrl) => ElevatedButton(
+              onPressed: ctrl.increment,
               child: Text("Increment"),
               key: buttonKey,
             ),
