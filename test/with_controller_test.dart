@@ -5,8 +5,8 @@ import 'package:with_controller/widgets/with_controller_widget.dart';
 import 'package:with_controller/with_controller.dart';
 
 class CounterStore {
-  MobX.Observable<int> counter;
-  MobX.Action increment;
+  late MobX.Observable<int> counter;
+  MobX.Action? increment;
 
   CounterStore() {
     counter = MobX.Observable(0);
@@ -22,13 +22,14 @@ void main() {
       await tester.pumpWidget(
         WithController(
           controller: (ctx) => CounterStore(),
-          builder: (ctx, ctrl) => Container(),
+          builder: (ctx, dynamic ctrl) => Container(),
           key: widgetKey,
         ),
       );
 
       WithControllerState<CounterStore> widgetState =
-          (tester.element(find.byKey(widgetKey)) as StatefulElement).state;
+          (tester.element(find.byKey(widgetKey)) as StatefulElement).state
+              as WithControllerState<CounterStore>;
 
       expect(widgetState.controller, isNotNull);
       expect(widgetState.controller.counter.value, 0);
@@ -58,10 +59,13 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: WithController<CounterStore>(
-            reactions: [(ctrl) => MobX.reaction((r) => ctrl.counter.value, (v) => holder = v)],
+            reactions: [
+              (ctrl) => MobX.reaction(
+                  (r) => ctrl.counter.value, (dynamic v) => holder = v)
+            ],
             controller: (ctx) => CounterStore(),
             builder: (ctx, ctrl) => RaisedButton(
-              onPressed: ctrl.increment,
+              onPressed: () => ctrl.increment!.call(),
               child: Text("Increment"),
               key: buttonKey,
             ),
