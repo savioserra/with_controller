@@ -19,13 +19,14 @@ class MyHomePage extends StatelessWidget {
       controller: (ctx) => MyCounterStore(),
       reactions: [
         (controller) => autorun((r) => print(controller.counter)),
-        (controller) => when((r) => controller.counter == 10, () => print("Wow!")),
+        (controller) =>
+            when((r) => controller.counter == 10, () => print("Wow!")),
       ],
       disposer: (controller) => print("You could do something fancy here"),
       builder: (context, controller) => Column(
         children: [
           Text(title),
-          RaisedButton(
+          ElevatedButton(
             child: Text("Click Me"),
             onPressed: controller.increment,
           )

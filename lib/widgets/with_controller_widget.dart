@@ -25,17 +25,17 @@ class WithController<C> extends StatefulWidget {
   /// ```dart
   /// (controller) => controller.disposeSomething();
   /// ```
-  final ControllerDisposer<C> disposer;
+  final ControllerDisposer<C>? disposer;
 
   /// Builder function. Takes a [BuildContext] and a controller;
   final WidgetControllerBuilder<C> builder;
 
   const WithController({
-    @required this.controller,
-    @required this.builder,
+    required this.controller,
+    required this.builder,
     this.reactions = const [],
     this.disposer,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -43,30 +43,27 @@ class WithController<C> extends StatefulWidget {
 }
 
 @visibleForTesting
-class WithControllerState<C> extends State<WithController<C>> {
-  List<ReactionDisposer> reactionDisposers;
-  C controller;
+class WithControllerState<C> extends State<WithController<C >> {
+  List<ReactionDisposer>? reactionDisposers;
+  late C controller;
 
   @override
   void initState() {
     super.initState();
+    controller = widget.controller(context);
   }
 
   @override
   void dispose() {
-    reactionDisposers.forEach((disposer) => disposer());
+    reactionDisposers!.forEach((disposer) => disposer());
 
-    if (widget.disposer != null) widget.disposer(controller);
+    if (widget.disposer != null) widget.disposer!(controller);
 
     super.dispose();
   }
 
   @override
   void didChangeDependencies() {
-    if (controller == null) {
-      controller = widget.controller(context);
-    }
-
     if (reactionDisposers == null) {
       reactionDisposers =
           widget.reactions.map((creator) => creator(controller)).toList();
